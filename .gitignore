@@ -1,0 +1,14 @@
+# Created by required.sh
+.venv/
+train.csv
+scowl-2020.12.07/
+
+# Written by the notebook
+cache/
+data/
+results/
+
+# Editor and system files
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
