@@ -1,0 +1,897 @@
+Outputs of every saved model in cache/models (LSTM and Transformer: 50-epoch runs with patience 3), 2026-11-21.
+Metrics are from each system's metrics.tsv in results/latest/; the rest is the side-by-side cell and the user-sentence cell of final.ipynb.
+
+============================== test-set metrics (results/latest) ==============================
+                            parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                             
+copy                                none 17.97 66.53    52.72    52.71         0.00              0.00          0.01
+copy+flat                           flat 33.04 71.85    69.27    69.26         1.00              0.00          0.03
+copy+bracketed                 bracketed  7.06 55.80    69.26    50.14         0.05              0.00          0.03
+word_substitution                   none 37.39 71.77    68.32    68.31         1.45              0.00          4.09
+word_substitution+flat              flat 63.14 88.51    86.31    86.29        12.61              0.00          0.04
+word_substitution+bracketed    bracketed 15.37 70.40    86.29    63.16         0.14              0.00          0.03
+lstm                                none 50.17 69.14    82.25    77.60        23.90           4969.90         32.38
+lstm+flat                           flat 92.07 96.11    97.56    97.54        80.62           1323.92        214.61
+lstm+bracketed                 bracketed 88.05 92.94    95.60    95.12        62.70           3642.10         64.59
+transformer                         none 42.91 68.51    84.22    72.74        13.45           3953.49        114.92
+transformer+flat                    flat 85.43 92.09    95.88    94.52        59.06           6579.73         73.71
+transformer+bracketed          bracketed 47.60 71.35    85.43    75.11        17.19           6166.68        126.69
+t5                                  none 96.31 98.48    98.38    98.38        85.55           1801.48        117.22
+t5+flat                             flat 95.67 98.27    98.13    98.13        83.06          15693.05        187.93
+t5+bracketed                   bracketed 93.70 97.54    98.01    97.48        77.49           8065.01        198.55
+
+============================== hand-written sentences ==============================
+we support the proposal .
+  [tests]                         pronoun gets X-, article dropped
+  lstm                         -> X-WE SUPPORT PROPOSAL .
+  lstm+flat                    -> X-WE SUPPORT PROPOSAL .
+  lstm+bracketed               -> X-WE SUPPORT PROPOSAL .
+  transformer                  -> X-WE SUPPORT PROPOSAL .
+  transformer+flat             -> X-WE SUPPORT PROPOSAL .
+  transformer+bracketed        -> X-WE SUPPORT PROPOSAL .
+  t5                           -> X-WE SUPPORT PROPOSAL .
+  t5+flat                      -> X-WE SUPPORT PROPOSAL .
+  t5+bracketed                 -> X-WE SUPPORT PROPOSAL .
+
+the commission is not ready .
+  [tests]                         negation gets DESC-, be kept or dropped
+  lstm                         -> COMMISSION BE DESC-NOT DESC-READY .
+  lstm+flat                    -> COMMISSION BE DESC-NOT DESC-READY .
+  lstm+bracketed               -> COMMISSION BE DESC-NOT DESC-READY .
+  transformer                  -> COMMISSION BE DESC-NOT DESC-READY .
+  transformer+flat             -> COMMISSION BE DESC-NOT DESC-READY .
+  transformer+bracketed        -> COMMISSION BE DESC-NOT DESC-READY .
+  t5                           -> COMMISSION BE DESC-NOT DESC-READY .
+  t5+flat                      -> COMMISSION BE DESC-NOT DESC-READY .
+  t5+bracketed                 -> COMMISSION BE DESC-NOT DESC-READY .
+
+this is a very important report .
+  [tests]                         adverb and adjective get DESC-
+  lstm                         -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  lstm+flat                    -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  lstm+bracketed               -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  transformer                  -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  transformer+flat             -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  transformer+bracketed        -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  t5                           -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  t5+flat                      -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+  t5+bracketed                 -> THIS BE DESC-VERY DESC-IMPORTANT REPORT .
+
+they have voted against their own interests .
+  [tests]                         pronouns, possessive, tense
+  lstm                         -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  lstm+flat                    -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  lstm+bracketed               -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  transformer                  -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  transformer+flat             -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  transformer+bracketed        -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  t5                           -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  t5+flat                      -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+  t5+bracketed                 -> X-Y HAVE VOTE AGAINST X-Y DESC-OWN INTEREST .
+
+I thank the rapporteur for her excellent work .
+  [tests]                         common parliamentary phrase
+  lstm                         -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  lstm+flat                    -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  lstm+bracketed               -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  transformer                  -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  transformer+flat             -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  transformer+bracketed        -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  t5                           -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  t5+flat                      -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+  t5+bracketed                 -> X-I THANK RAPPORTEUR FOR X-SHE DESC-EXCELLENT WORK .
+
+what will the council do about it ?
+  [tests]                         question
+  lstm                         -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  lstm+flat                    -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  lstm+bracketed               -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  transformer                  -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  transformer+flat             -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  transformer+bracketed        -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  t5                           -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  t5+flat                      -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+  t5+bracketed                 -> WHAT WILL COUNCIL DO ABOUT X-IT ?
+
+the zebra danced quietly in the moonlight .
+  [tests]                         words unseen in training
+  lstm                         -> ALBINO SQUANDER FIGUEIREDO IN DESC-UNCONTESTED .
+  lstm+flat                    -> DESC-ROLLERCOASTER DANCE DESC-ORIGINALLY IN VICTOR
+  lstm+bracketed               -> PHRASEJUST DESC-UNHEARD TRIAL IN DESC-AFFIRMATIVE .
+  transformer                  -> ALBINO KILL IN .
+  transformer+flat             -> DANCE DANCE DANCE EAT IN DESC-AFFIRMATIVE .
+  transformer+bracketed        -> ALBINO IN DESC-PRETTY .
+  t5                           -> ZEBRA DANCE DESC-NOTICELY IN MOONLIGHT .
+  t5+flat                      -> ZEBRA DANCE DESC-QUIETLY IN MOONFLIGHT .
+  t5+bracketed                 -> ZEBRA DESC-QUICKLY DRAIN IN MOONFLIGHT .
+
+mr president , ladies and gentlemen , the situation in the region is serious and we must act quickly before it becomes worse .
+  [tests]                         long sentence
+  lstm                         -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN GAZA BE SITUATION X-WE MUST ACT AS DESC-QUICKLY .
+  lstm+flat                    -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY BEFORE X-IT BECOME DESC-WORSE .
+  lstm+bracketed               -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY BEFORE X-IT BECOME DESC-WORSE .
+  transformer                  -> MR PRESIDENT , LADY AND GENTLEMAN , X-IT MUST ACT DESC-QUICKLY IN SITUATION BEFORE X-WE MUST ACT DESC-QUICKLY AND BEFORE X-WE MUST ACT DESC-QUICKLY .
+  transformer+flat             -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY .
+  transformer+bracketed        -> MR PRESIDENT , LADY AND GENTLEMAN , X-IT BE DESC-SERIOUS WHY X-WE MUST ACT DESC-QUICKLY IN SITUATION .
+  t5                           -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY BEFORE X-IT BECOME DESC-WORSE .
+  t5+flat                      -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY BEFORE X-IT BECOME DESC-WORSE .
+  t5+bracketed                 -> MR PRESIDENT , LADY AND GENTLEMAN , SITUATION IN REGION BE DESC-SERIOUS AND X-WE MUST ACT DESC-QUICKLY BEFORE X-IT BECOME DESC-WORST .
+
+============================== held-out test pairs ==============================
+we are , in fact , fairly concerned .
+  [reference]                     X-WE BE , IN FACT , DESC-FAIRLY DESC-CONCERNED .
+  lstm                         -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  lstm+flat                    -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  lstm+bracketed               -> X-WE BE CONCERN , IN FACT , DESC-FAIRLY .
+  transformer                  -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  transformer+flat             -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  transformer+bracketed        -> X-WE BE DESC-FAIRLY CONCERN , IN FACT .
+  t5                           -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  t5+flat                      -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+  t5+bracketed                 -> X-WE BE , IN FACT , DESC-FAIRLY CONCERN .
+
+i also call on them to work together to find the appropriate financing model for renovating existing buildings .
+  [reference]                     X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  lstm                         -> X-I DESC-ALSO CALL TO X-Y WORK ON X-Y DESC-EASIER TO OPERATE EXIST MODEL FOR RENOVATE EXIST MODEL .
+  lstm+flat                    -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  lstm+bracketed               -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  transformer                  -> X-I DESC-ALSO CALL ON X-Y TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  transformer+flat             -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  transformer+bracketed        -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  t5                           -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  t5+flat                      -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+  t5+bracketed                 -> X-I DESC-ALSO CALL ON X-Y TO WORK DESC-TOGER TO FIND DESC-APPROPRIATE FINANCING MODEL FOR RENOVATE EXIST BUILDING .
+
+any civilised society is judged not by how it treats its majority but how it treats its minorities .
+  [reference]                     ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY BUT HOW X-IT TREAT X-ITS MINORITY .
+  lstm                         -> ANY DESC-CIVILISED MINORITY BE DESC-NOT FAIL BY THANK HOW X-ITS HOW X-IT BE JUDGE THAT VIOLATE COUNCIL .
+  lstm+flat                    -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY BUT HOW X-IT TREAT X-ITS MINORITY .
+  lstm+bracketed               -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BEFORE HOW X-IT TREAT X-ITS MAJORITY BUT HOW X-IT TREAT X-ITS MINORITY .
+  transformer                  -> MAJORITY MINORITY BE DESC-NOT HOW X-IT MEAN ANY FEAR BY X-ITS MINORITY .
+  transformer+flat             -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY , BUT HOW X-IT TREAT X-ITS MINORITY .
+  transformer+bracketed        -> ANY DESC-CIVILISED SOCIETY BE TREAT BY JUDGE , BUT X-IT DESC-NOT X-ITS MAJORITY .
+  t5                           -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY BUT HOW X-IT TREAT X-ITS MINORITY .
+  t5+flat                      -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY , BUT HOW X-IT TREAT X-ITS MINORITY .
+  t5+bracketed                 -> ANY DESC-CIVILISED SOCIETY BE JUDGE DESC-NOT BY HOW X-IT TREAT X-ITS MAJORITY , BUT HOW X-IT TREAT X-ITS MINORITY .
+
+this will also be dealt with in a meeting with the ukrainian authorities in only a few weeks time .
+  [reference]                     THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+  lstm                         -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH MEETING WEEK , DESC-ONLY DESC-FEW WEEK IN TIME .
+  lstm+flat                    -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+  lstm+bracketed               -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+  transformer                  -> THIS WILL DESC-ALSO BE DEAL WITH IN TIME IN MEET DESC-FEW WEEK .
+  transformer+flat             -> THIS WILL DESC-ALSO BE DEAL WITH MEETING IN MEETING WITH UKRAINIAN AUTHORITY DESC-ONLY DESC-FEW WEEK TIME .
+  transformer+bracketed        -> THIS WILL DESC-ALSO BE DEAL WITH DESC-ONLY DESC-FEW WEEK IN TIME AUTHORITY .
+  t5                           -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+  t5+flat                      -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+  t5+bracketed                 -> THIS WILL DESC-ALSO BE DEAL WITH IN MEETING WITH UKRAINIAN AUTHORITY IN DESC-ONLY DESC-FEW WEEK TIME .
+
+
+============================== user sentence ==============================
+computational linguistics is a fun course .
+  copy                         -> COMPUTATIONAL LINGUISTICS IS A FUN COURSE .
+  copy+flat                    -> COMPUTATIONAL LINGUISTIC BE A FUN COURSE
+  copy+bracketed               -> BE LINGUISTIC COMPUTATIONAL COURSE A FUN
+  word_substitution            -> COMPUTATIONAL LINGUISTIC FUN COURSE
+  word_substitution+flat       -> DESC-COMPUTATIONAL LINGUISTIC DESC-FUN COURSE
+  word_substitution+bracketed  -> LINGUISTIC DESC-COMPUTATIONAL COURSE DESC-FUN
+  lstm                         -> DESC-MEANWHILE AFIUNUS BE COURSE COURSE .
+  lstm+flat                    -> FUNGUS LINGUISTIC BE DESC-VILE , COURSE .
+  lstm+bracketed               -> POLYCHLORINATE BIPHENYL BE DETERRENT COURSE .
+  transformer                  -> COURSE BE WWW.8HOURS.EU .
+  transformer+flat             -> LINGUISTIC LINGUISTIC LINGUISTIC BE NOW COURSE .
+  transformer+bracketed        -> DESC-PARADOXICAL BE , COURSE , DESC-PARADOXICAL .
+  t5                           -> DESC-CODEFORMATION LINGUISTIC BE FUN COURSE .
+  t5+flat                      -> DESC-COmputationAL LINGUISTIC BE FUNNY , COURSE .
+  t5+bracketed                 -> DESC-COmputationOXICAL LINGUISTIC BE FUN COURSE .
+
+============================== per-epoch losses (training_history.tsv) ==============================
+Mean cross-entropy per gold target token (T5: per subword token).
+* marks the best validation epoch, whose weights were kept.
+
+lstm (38 epochs, best 35)
+  epoch  training  validation
+      1    4.4354      3.4020
+      2    3.1780      2.7578
+      3    2.6735      2.4042
+      4    2.3489      2.1820
+      5    2.0996      2.0130
+      6    1.9019      1.8830
+      7    1.7484      1.8286
+      8    1.6280      1.7372
+      9    1.5245      1.6820
+     10    1.4345      1.6397
+     11    1.3592      1.5832
+     12    1.2900      1.5524
+     13    1.2299      1.5170
+     14    1.1706      1.5056
+     15    1.1248      1.5026
+     16    1.0836      1.5090
+     17    1.0397      1.4246
+     18    1.0039      1.3820
+     19    0.9643      1.3536
+     20    0.9325      1.3445
+     21    0.9027      1.3395
+     22    0.8734      1.3492
+     23    0.8472      1.2946
+     24    0.8261      1.2999
+     25    0.7950      1.2601
+     26    0.7709      1.2533
+     27    0.7504      1.2449
+     28    0.7342      1.2337
+     29    0.7116      1.2469
+     30    0.6894      1.2389
+     31    0.6758      1.2163
+     32    0.6575      1.1937
+     33    0.6405      1.1857
+     34    0.6293      1.1920
+     35    0.6187      1.1730 *
+     36    0.6034      1.1988
+     37    0.5856      1.1793
+     38    0.5737      1.1843
+
+lstm+flat (10 epochs, best 7)
+  epoch  training  validation
+      1    2.3609      0.5785
+      2    0.5299      0.3390
+      3    0.3400      0.2961
+      4    0.2634      0.2673
+      5    0.2190      0.2721
+      6    0.1894      0.2678
+      7    0.1617      0.2606 *
+      8    0.1429      0.2636
+      9    0.1302      0.2671
+     10    0.1165      0.2622
+
+lstm+bracketed (15 epochs, best 12)
+  epoch  training  validation
+      1    3.9834      2.1384
+      2    1.7237      1.0978
+      3    1.0025      0.7485
+      4    0.6887      0.5932
+      5    0.5287      0.5296
+      6    0.4269      0.4910
+      7    0.3631      0.4871
+      8    0.3132      0.4659
+      9    0.2772      0.4548
+     10    0.2465      0.4722
+     11    0.2271      0.4746
+     12    0.2074      0.4369 *
+     13    0.1956      0.4464
+     14    0.1818      0.4373
+     15    0.1732      0.4455
+
+transformer (22 epochs, best 19)
+  epoch  training  validation
+      1    4.8561      3.9434
+      2    3.6147      3.2393
+      3    2.9527      2.7853
+      4    2.4671      2.4698
+      5    2.1040      2.2507
+      6    1.8209      2.1079
+      7    1.6060      2.0053
+      8    1.4371      1.9366
+      9    1.3078      1.8908
+     10    1.1976      1.8490
+     11    1.1067      1.8300
+     12    1.0291      1.7965
+     13    0.9585      1.7700
+     14    0.9021      1.7651
+     15    0.8465      1.7674
+     16    0.8020      1.7453
+     17    0.7588      1.7426
+     18    0.7171      1.7595
+     19    0.6849      1.7264 *
+     20    0.6509      1.7355
+     21    0.6187      1.7273
+     22    0.5898      1.7290
+
+transformer+flat (35 epochs, best 32)
+  epoch  training  validation
+      1    4.5837      3.0724
+      2    2.4759      1.7790
+      3    1.5627      1.2415
+      4    1.1203      1.0069
+      5    0.8565      0.8676
+      6    0.6893      0.7796
+      7    0.5755      0.7714
+      8    0.4890      0.7272
+      9    0.4291      0.6684
+     10    0.3751      0.6411
+     11    0.3343      0.6312
+     12    0.3035      0.6084
+     13    0.2753      0.5972
+     14    0.2503      0.5895
+     15    0.2309      0.5794
+     16    0.2158      0.5615
+     17    0.1970      0.5560
+     18    0.1834      0.5492
+     19    0.1743      0.5414
+     20    0.1614      0.5442
+     21    0.1548      0.5265
+     22    0.1469      0.5481
+     23    0.1377      0.5211
+     24    0.1308      0.5263
+     25    0.1242      0.5185
+     26    0.1190      0.5189
+     27    0.1147      0.5169
+     28    0.1100      0.5126
+     29    0.1043      0.5074
+     30    0.1005      0.5097
+     31    0.0959      0.5209
+     32    0.0947      0.5059 *
+     33    0.0912      0.5090
+     34    0.0871      0.5125
+     35    0.0836      0.5114
+
+transformer+bracketed (24 epochs, best 21)
+  epoch  training  validation
+      1    5.0419      4.2278
+      2    3.8765      3.5215
+      3    3.2399      3.0443
+      4    2.7400      2.6754
+      5    2.3474      2.4151
+      6    2.0304      2.2079
+      7    1.7816      2.0717
+      8    1.5865      1.9782
+      9    1.4278      1.8950
+     10    1.2971      1.8425
+     11    1.1926      1.7969
+     12    1.1011      1.7598
+     13    1.0248      1.7025
+     14    0.9588      1.6875
+     15    0.8998      1.6739
+     16    0.8480      1.6520
+     17    0.8020      1.6231
+     18    0.7553      1.6385
+     19    0.7205      1.6180
+     20    0.6831      1.5945
+     21    0.6510      1.5770 *
+     22    0.6189      1.5996
+     23    0.5917      1.5810
+     24    0.5634      1.5781
+
+t5 (3 epochs, best 3)
+  epoch  training  validation
+      1    0.3653      0.0758
+      2    0.1141      0.0431
+      3    0.0718      0.0318 *
+
+t5+flat (3 epochs, best 3)
+  epoch  training  validation
+      1    0.4017      0.0965
+      2    0.1333      0.0656
+      3    0.0901      0.0496 *
+
+t5+bracketed (3 epochs, best 3)
+  epoch  training  validation
+      1    0.4871      0.1166
+      2    0.1556      0.0754
+      3    0.1065      0.0620 *
+
+============================== notebook cell outputs from the two most recent sets of runs ==============================
+Run 1: 20-21 November 2026, 23:02 to 06:41; losses only. These are the scores and training times in final.tex.
+Run 2: 21 November 2026, 10:17 to 18:50; the same code plus per-epoch token accuracy.
+Run 2 reproduced every loss, stopping epoch and test score of run 1; only the training times differ.
+Each model ran in a fresh Python process (a restarted kernel) with every cell up to the model cell.
+T5 was not rerun in either set; its results and per-epoch losses are above.
+
+============================== shared cells before the model cells (identical output in every run) ==============================
+Removed 6619 duplicates. 81091 pairs remain.
+kept 6, review 2, removed 14
+  non_english                            7
+  identical                              5
+  terminal_punctuation_mismatch          4
+  name_report                            3
+  garbled_accent                         2
+  single_word                            1
+  non_latin                              1
+  boilerplate                            1
+  spoken_url                             1
+  consecutive_punctuation                1
+  language_code                          1
+  number_variant                         1
+  starts_with_number                     1
+name_report,identical                                   lange report
+name_report,non_english,identical                       report bogdan golik
+single_word                                             vote
+boilerplate,non_english                                 membership of parliament see minutes
+non_english                                             visit www.europarl.europa.eu for details
+spoken_url,non_english,identical                        visit europarl dot eu
+non_latin,non_english                                   Ελλάδα is a country
+non_english                                             café crème is fine
+name_report,identical                                   democracy report
+garbled_accent,terminal_punctuation_mismatch            thank you , mrs záborská .
+terminal_punctuation_mismatch,starts_with_number        3 . subject democracy report ?
+number_variant                                          written statements rule 142
+non_english,identical                                   die kommission muss handeln
+garbled_accent,terminal_punctuation_mismatch            we must thank mrs malmström .
+consecutive_punctuation,terminal_punctuation_mismatch   do we agree ? !
+language_code                                           cs mr president , we agree .
+(kept)                                                  the commission must act now .
+(kept)                                                  mr president , we agree .
+(kept)                                                  we agree .
+(kept)                                                  we agree ? !
+(kept)                                                  written statements rule 120
+(kept)                                                  we agree with mrs rühle .
+Loaded filtered data from cache/filtered.pkl
+Wrote filtered.tsv, review.tsv, removed.tsv and summary.json to data/interim
+kept 79159, review 393, removed 1503
+  garbled_accent                       548
+  identical                            525
+  number_variant                       331
+  terminal_punctuation_mismatch        284
+  boilerplate                          245
+  name_report                          187
+  single_word                          130
+  non_english                           86
+  gloss_inner_question_mark             79
+  consecutive_punctuation               75
+  language_code                         33
+  starts_with_number                    25
+  non_latin                             19
+  empty_side                             4
+TEXT:      mr deß , I will explain .
+BRACKETED: (ROOT explain/VERB (dep deß/PROPN (compound mr/PROPN)) (nsubj i/PRON) (aux will/AUX))
+FLAT:      mr|PROPN|compound|1 deß|PROPN|dep|5 i|PRON|nsubj|5 will|AUX|aux|5 explain|VERB|ROOT|5
+
+TEXT:      today , for example , I am concerned about the .
+BRACKETED: (ROOT be/AUX (npadvmod today/NOUN) (prep for/ADP (pobj example/NOUN)) (nsubj i/PRON) (acomp concern/VERB (prep about/ADP (pobj the/PRON))))
+FLAT:      today|NOUN|npadvmod|6 for|ADP|prep|6 example|NOUN|pobj|2 i|PRON|nsubj|6 be|AUX|ROOT|6 concern|VERB|acomp|6 about|ADP|prep|7 the|PRON|pobj|8
+
+TEXT:      however , to support his .
+BRACKETED: (ROOT support/VERB (advmod however/ADV) (aux to/PART) (dobj his/PRON))
+FLAT:      however|ADV|advmod|3 to|PART|aux|3 support|VERB|ROOT|3 his|PRON|dobj|3
+
+TEXT:      therefore , I believe that we should aim for a postponement and then ultimately .
+BRACKETED: (ROOT believe/VERB (advmod therefore/ADV) (nsubj i/PRON) (ccomp aim/VERB (mark that/SCONJ) (nsubj we/PRON) (aux should/AUX) (prep for/ADP (pobj postponement/NOUN (det a/DET))) (cc and/CCONJ)) (advmod ultimately/ADV (advmod then/ADV)))
+FLAT:      therefore|ADV|advmod|3 i|PRON|nsubj|3 believe|VERB|ROOT|3 that|SCONJ|mark|7 we|PRON|nsubj|7 should|AUX|aux|7 aim|VERB|ccomp|3 for|ADP|prep|7 a|DET|det|10 postponement|NOUN|pobj|8 and|CCONJ|cc|7 then|ADV|advmod|13 ultimately|ADV|advmod|3
+
+TEXT:      in any case , the situation is untenable .
+BRACKETED: (ROOT be/AUX (prep in/ADP (pobj case/NOUN (det any/DET))) (nsubj situation/NOUN (det the/DET)) (acomp untenable/ADJ))
+FLAT:      in|ADP|prep|6 any|DET|det|2 case|NOUN|pobj|0 the|DET|det|5 situation|NOUN|nsubj|6 be|AUX|ROOT|6 untenable|ADJ|acomp|6
+
+TEXT:      this care requires .
+BRACKETED: (ROOT require/VERB (nsubj care/NOUN (det this/DET)))
+FLAT:      this|DET|det|1 care|NOUN|nsubj|2 require|VERB|ROOT|2
+
+TEXT:      the citizens of the european union are very sensitive .
+BRACKETED: (ROOT be/AUX (nsubj citizen/NOUN (det the/DET) (prep of/ADP (pobj union/PROPN (det the/DET) (compound european/PROPN)))) (acomp sensitive/ADJ (advmod very/ADV)))
+FLAT:      the|DET|det|1 citizen|NOUN|nsubj|6 of|ADP|prep|1 the|DET|det|5 european|PROPN|compound|5 union|PROPN|pobj|2 be|AUX|ROOT|6 very|ADV|advmod|8 sensitive|ADJ|acomp|6
+
+TEXT:      and if I am being accused .
+BRACKETED: (ROOT and/CCONJ (advcl accuse/VERB (mark if/SCONJ) (nsubjpass i/PRON) (aux be/AUX) (auxpass be/AUX)))
+FLAT:      and|CCONJ|ROOT|0 if|SCONJ|mark|5 i|PRON|nsubjpass|5 be|AUX|aux|5 be|AUX|auxpass|5 accuse|VERB|advcl|0
+
+TEXT:      we realise , however .
+BRACKETED: (ROOT realise/VERB (nsubj we/PRON) (advmod however/ADV))
+FLAT:      we|PRON|nsubj|1 realise|VERB|ROOT|1 however|ADV|advmod|1
+
+TEXT:      the revival of the energy performance of buildings sector , except for a striking reduction .
+BRACKETED: (ROOT revival/NOUN (det the/DET) (prep of/ADP (pobj performance/NOUN (det the/DET) (compound energy/NOUN) (prep of/ADP (pobj sector/NOUN (compound building/NOUN))))) (prep except/SCONJ (prep for/ADP (pobj reduction/NOUN (det a/DET) (amod striking/ADJ)))))
+FLAT:      the|DET|det|1 revival|NOUN|ROOT|1 of|ADP|prep|1 the|DET|det|5 energy|NOUN|compound|5 performance|NOUN|pobj|2 of|ADP|prep|5 building|NOUN|compound|8 sector|NOUN|pobj|6 except|SCONJ|prep|1 for|ADP|prep|10 a|DET|det|14 striking|ADJ|amod|14 reduction|NOUN|pobj|11
+
+The dog ate the bone.
+  copy                         -> THE DOG ATE THE BONE.
+  word_substitution            -> DOG EAT BONE
+She is going to the store tomorrow.
+  copy                         -> SHE IS GOING TO THE STORE TOMORROW.
+  word_substitution            -> SHE GO TO STORE TOMORROW
+Where did you buy those shoes?
+  copy                         -> WHERE DID YOU BUY THOSE SHOES?
+  word_substitution            -> WHERE DO YOU BUY THOSE SHOE
+The dog ate the bone.
+  copy+flat                    -> THE DOG EAT THE BONE
+  copy+bracketed               -> EAT DOG THE BONE THE
+  word_substitution+flat       -> DOG EAT BONE
+  word_substitution+bracketed  -> EAT DOG BONE
+She is going to the store tomorrow.
+  copy+flat                    -> SHE BE GO TO THE STORE TOMORROW
+  copy+bracketed               -> GO SHE BE TO STORE THE TOMORROW
+  word_substitution+flat       -> X-SHE GO TO STORE TOMORROW
+  word_substitution+bracketed  -> GO X-SHE TO STORE TOMORROW
+Where did you buy those shoes?
+  copy+flat                    -> WHERE DO YOU BUY THOSE SHOE
+  copy+bracketed               -> BUY WHERE DO YOU SHOE THOSE
+  word_substitution+flat       -> WHERE DO X-YOU BUY THOSE SHOE
+  word_substitution+bracketed  -> BUY WHERE DO X-YOU SHOE THOSE
+split
+training      63327
+validation     7916
+test           7916
+
+============================== lstm, run 1 ==============================
+[lstm] epoch   1: training loss 4.435, validation loss 3.402
+[lstm] epoch   2: training loss 3.178, validation loss 2.758
+[lstm] epoch   3: training loss 2.674, validation loss 2.404
+[lstm] epoch   4: training loss 2.349, validation loss 2.182
+[lstm] epoch   5: training loss 2.100, validation loss 2.013
+[lstm] epoch   6: training loss 1.902, validation loss 1.883
+[lstm] epoch   7: training loss 1.748, validation loss 1.829
+[lstm] epoch   8: training loss 1.628, validation loss 1.737
+[lstm] epoch   9: training loss 1.524, validation loss 1.682
+[lstm] epoch  10: training loss 1.434, validation loss 1.640
+[lstm] epoch  11: training loss 1.359, validation loss 1.583
+[lstm] epoch  12: training loss 1.290, validation loss 1.552
+[lstm] epoch  13: training loss 1.230, validation loss 1.517
+[lstm] epoch  14: training loss 1.171, validation loss 1.506
+[lstm] epoch  15: training loss 1.125, validation loss 1.503
+[lstm] epoch  16: training loss 1.084, validation loss 1.509
+[lstm] epoch  17: training loss 1.040, validation loss 1.425
+[lstm] epoch  18: training loss 1.004, validation loss 1.382
+[lstm] epoch  19: training loss 0.964, validation loss 1.354
+[lstm] epoch  20: training loss 0.933, validation loss 1.345
+[lstm] epoch  21: training loss 0.903, validation loss 1.339
+[lstm] epoch  22: training loss 0.873, validation loss 1.349
+[lstm] epoch  23: training loss 0.847, validation loss 1.295
+[lstm] epoch  24: training loss 0.826, validation loss 1.300
+[lstm] epoch  25: training loss 0.795, validation loss 1.260
+[lstm] epoch  26: training loss 0.771, validation loss 1.253
+[lstm] epoch  27: training loss 0.750, validation loss 1.245
+[lstm] epoch  28: training loss 0.734, validation loss 1.234
+[lstm] epoch  29: training loss 0.712, validation loss 1.247
+[lstm] epoch  30: training loss 0.689, validation loss 1.239
+[lstm] epoch  31: training loss 0.676, validation loss 1.216
+[lstm] epoch  32: training loss 0.658, validation loss 1.194
+[lstm] epoch  33: training loss 0.641, validation loss 1.186
+[lstm] epoch  34: training loss 0.629, validation loss 1.192
+[lstm] epoch  35: training loss 0.619, validation loss 1.173
+[lstm] epoch  36: training loss 0.603, validation loss 1.199
+[lstm] epoch  37: training loss 0.586, validation loss 1.179
+[lstm] epoch  38: training loss 0.574, validation loss 1.184
+[lstm] stopped early; best epoch was 35
+Saved lstm to cache/models/lstm.pt
+       parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                        
+lstm           none 50.17 69.14    82.25    77.60        23.90           4969.90         32.38
+
+Wrote results to results/latest/lstm
+
+============================== lstm, run 2 ==============================
+[lstm] epoch   1: training loss 4.435, validation loss 3.402, training accuracy 0.368, validation accuracy 0.500
+[lstm] epoch   2: training loss 3.178, validation loss 2.758, training accuracy 0.510, validation accuracy 0.570
+[lstm] epoch   3: training loss 2.674, validation loss 2.404, training accuracy 0.557, validation accuracy 0.611
+[lstm] epoch   4: training loss 2.349, validation loss 2.182, training accuracy 0.589, validation accuracy 0.637
+[lstm] epoch   5: training loss 2.100, validation loss 2.013, training accuracy 0.616, validation accuracy 0.657
+[lstm] epoch   6: training loss 1.902, validation loss 1.883, training accuracy 0.637, validation accuracy 0.677
+[lstm] epoch   7: training loss 1.748, validation loss 1.829, training accuracy 0.656, validation accuracy 0.681
+[lstm] epoch   8: training loss 1.628, validation loss 1.737, training accuracy 0.671, validation accuracy 0.696
+[lstm] epoch   9: training loss 1.524, validation loss 1.682, training accuracy 0.685, validation accuracy 0.704
+[lstm] epoch  10: training loss 1.434, validation loss 1.640, training accuracy 0.699, validation accuracy 0.711
+[lstm] epoch  11: training loss 1.359, validation loss 1.583, training accuracy 0.710, validation accuracy 0.721
+[lstm] epoch  12: training loss 1.290, validation loss 1.552, training accuracy 0.721, validation accuracy 0.725
+[lstm] epoch  13: training loss 1.230, validation loss 1.517, training accuracy 0.730, validation accuracy 0.732
+[lstm] epoch  14: training loss 1.171, validation loss 1.506, training accuracy 0.740, validation accuracy 0.734
+[lstm] epoch  15: training loss 1.125, validation loss 1.503, training accuracy 0.748, validation accuracy 0.737
+[lstm] epoch  16: training loss 1.084, validation loss 1.509, training accuracy 0.755, validation accuracy 0.738
+[lstm] epoch  17: training loss 1.040, validation loss 1.425, training accuracy 0.762, validation accuracy 0.749
+[lstm] epoch  18: training loss 1.004, validation loss 1.382, training accuracy 0.768, validation accuracy 0.757
+[lstm] epoch  19: training loss 0.964, validation loss 1.354, training accuracy 0.776, validation accuracy 0.761
+[lstm] epoch  20: training loss 0.933, validation loss 1.345, training accuracy 0.781, validation accuracy 0.765
+[lstm] epoch  21: training loss 0.903, validation loss 1.339, training accuracy 0.786, validation accuracy 0.765
+[lstm] epoch  22: training loss 0.873, validation loss 1.349, training accuracy 0.792, validation accuracy 0.763
+[lstm] epoch  23: training loss 0.847, validation loss 1.295, training accuracy 0.797, validation accuracy 0.775
+[lstm] epoch  24: training loss 0.826, validation loss 1.300, training accuracy 0.801, validation accuracy 0.775
+[lstm] epoch  25: training loss 0.795, validation loss 1.260, training accuracy 0.807, validation accuracy 0.781
+[lstm] epoch  26: training loss 0.771, validation loss 1.253, training accuracy 0.811, validation accuracy 0.784
+[lstm] epoch  27: training loss 0.750, validation loss 1.245, training accuracy 0.815, validation accuracy 0.785
+[lstm] epoch  28: training loss 0.734, validation loss 1.234, training accuracy 0.818, validation accuracy 0.786
+[lstm] epoch  29: training loss 0.712, validation loss 1.247, training accuracy 0.823, validation accuracy 0.787
+[lstm] epoch  30: training loss 0.689, validation loss 1.239, training accuracy 0.827, validation accuracy 0.790
+[lstm] epoch  31: training loss 0.676, validation loss 1.216, training accuracy 0.830, validation accuracy 0.793
+[lstm] epoch  32: training loss 0.658, validation loss 1.194, training accuracy 0.834, validation accuracy 0.797
+[lstm] epoch  33: training loss 0.641, validation loss 1.186, training accuracy 0.837, validation accuracy 0.799
+[lstm] epoch  34: training loss 0.629, validation loss 1.192, training accuracy 0.839, validation accuracy 0.795
+[lstm] epoch  35: training loss 0.619, validation loss 1.173, training accuracy 0.842, validation accuracy 0.802
+[lstm] epoch  36: training loss 0.603, validation loss 1.199, training accuracy 0.845, validation accuracy 0.798
+[lstm] epoch  37: training loss 0.586, validation loss 1.179, training accuracy 0.849, validation accuracy 0.801
+[lstm] epoch  38: training loss 0.574, validation loss 1.184, training accuracy 0.852, validation accuracy 0.798
+[lstm] stopped early; best epoch was 35
+Saved lstm to cache/models/lstm.pt
+       parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                        
+lstm           none 50.17 69.14    82.25    77.60        23.90           6122.36         33.65
+
+Wrote results to results/latest/lstm
+
+============================== lstm+flat, run 1 ==============================
+[lstm+flat] epoch   1: training loss 2.361, validation loss 0.578
+[lstm+flat] epoch   2: training loss 0.530, validation loss 0.339
+[lstm+flat] epoch   3: training loss 0.340, validation loss 0.296
+[lstm+flat] epoch   4: training loss 0.263, validation loss 0.267
+[lstm+flat] epoch   5: training loss 0.219, validation loss 0.272
+[lstm+flat] epoch   6: training loss 0.189, validation loss 0.268
+[lstm+flat] epoch   7: training loss 0.162, validation loss 0.261
+[lstm+flat] epoch   8: training loss 0.143, validation loss 0.264
+[lstm+flat] epoch   9: training loss 0.130, validation loss 0.267
+[lstm+flat] epoch  10: training loss 0.117, validation loss 0.262
+[lstm+flat] stopped early; best epoch was 7
+Saved lstm+flat to cache/models/lstm+flat.pt
+          parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                           
+lstm+flat         flat 92.07 96.11    97.56    97.54        80.62           1323.92        214.61
+
+Wrote results to results/latest/lstm+flat
+
+============================== lstm+flat, run 2 ==============================
+[lstm+flat] epoch   1: training loss 2.361, validation loss 0.578, training accuracy 0.681, validation accuracy 0.916
+[lstm+flat] epoch   2: training loss 0.530, validation loss 0.339, training accuracy 0.921, validation accuracy 0.947
+[lstm+flat] epoch   3: training loss 0.340, validation loss 0.296, training accuracy 0.945, validation accuracy 0.956
+[lstm+flat] epoch   4: training loss 0.263, validation loss 0.267, training accuracy 0.955, validation accuracy 0.961
+[lstm+flat] epoch   5: training loss 0.219, validation loss 0.272, training accuracy 0.961, validation accuracy 0.962
+[lstm+flat] epoch   6: training loss 0.189, validation loss 0.268, training accuracy 0.965, validation accuracy 0.964
+[lstm+flat] epoch   7: training loss 0.162, validation loss 0.261, training accuracy 0.969, validation accuracy 0.967
+[lstm+flat] epoch   8: training loss 0.143, validation loss 0.264, training accuracy 0.972, validation accuracy 0.967
+[lstm+flat] epoch   9: training loss 0.130, validation loss 0.267, training accuracy 0.974, validation accuracy 0.966
+[lstm+flat] epoch  10: training loss 0.117, validation loss 0.262, training accuracy 0.977, validation accuracy 0.967
+[lstm+flat] stopped early; best epoch was 7
+Saved lstm+flat to cache/models/lstm+flat.pt
+          parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                           
+lstm+flat         flat 92.07 96.11    97.56    97.54        80.62           1448.46        221.16
+
+Wrote results to results/latest/lstm+flat
+
+============================== lstm+bracketed, run 1 ==============================
+[lstm+bracketed] epoch   1: training loss 3.983, validation loss 2.138
+[lstm+bracketed] epoch   2: training loss 1.724, validation loss 1.098
+[lstm+bracketed] epoch   3: training loss 1.003, validation loss 0.748
+[lstm+bracketed] epoch   4: training loss 0.689, validation loss 0.593
+[lstm+bracketed] epoch   5: training loss 0.529, validation loss 0.530
+[lstm+bracketed] epoch   6: training loss 0.427, validation loss 0.491
+[lstm+bracketed] epoch   7: training loss 0.363, validation loss 0.487
+[lstm+bracketed] epoch   8: training loss 0.313, validation loss 0.466
+[lstm+bracketed] epoch   9: training loss 0.277, validation loss 0.455
+[lstm+bracketed] epoch  10: training loss 0.246, validation loss 0.472
+[lstm+bracketed] epoch  11: training loss 0.227, validation loss 0.475
+[lstm+bracketed] epoch  12: training loss 0.207, validation loss 0.437
+[lstm+bracketed] epoch  13: training loss 0.196, validation loss 0.446
+[lstm+bracketed] epoch  14: training loss 0.182, validation loss 0.437
+[lstm+bracketed] epoch  15: training loss 0.173, validation loss 0.446
+[lstm+bracketed] stopped early; best epoch was 12
+Saved lstm+bracketed to cache/models/lstm+bracketed.pt
+               parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                
+lstm+bracketed    bracketed 88.05 92.94    95.60    95.12        62.70           3642.10         64.59
+
+Wrote results to results/latest/lstm+bracketed
+
+============================== lstm+bracketed, run 2 ==============================
+[lstm+bracketed] epoch   1: training loss 3.983, validation loss 2.138, training accuracy 0.436, validation accuracy 0.679
+[lstm+bracketed] epoch   2: training loss 1.724, validation loss 1.098, training accuracy 0.735, validation accuracy 0.831
+[lstm+bracketed] epoch   3: training loss 1.003, validation loss 0.748, training accuracy 0.838, validation accuracy 0.888
+[lstm+bracketed] epoch   4: training loss 0.689, validation loss 0.593, training accuracy 0.885, validation accuracy 0.912
+[lstm+bracketed] epoch   5: training loss 0.529, validation loss 0.530, training accuracy 0.908, validation accuracy 0.923
+[lstm+bracketed] epoch   6: training loss 0.427, validation loss 0.491, training accuracy 0.923, validation accuracy 0.929
+[lstm+bracketed] epoch   7: training loss 0.363, validation loss 0.487, training accuracy 0.933, validation accuracy 0.933
+[lstm+bracketed] epoch   8: training loss 0.313, validation loss 0.466, training accuracy 0.941, validation accuracy 0.936
+[lstm+bracketed] epoch   9: training loss 0.277, validation loss 0.455, training accuracy 0.947, validation accuracy 0.939
+[lstm+bracketed] epoch  10: training loss 0.246, validation loss 0.472, training accuracy 0.952, validation accuracy 0.936
+[lstm+bracketed] epoch  11: training loss 0.227, validation loss 0.475, training accuracy 0.955, validation accuracy 0.938
+[lstm+bracketed] epoch  12: training loss 0.207, validation loss 0.437, training accuracy 0.958, validation accuracy 0.941
+[lstm+bracketed] epoch  13: training loss 0.196, validation loss 0.446, training accuracy 0.960, validation accuracy 0.942
+[lstm+bracketed] epoch  14: training loss 0.182, validation loss 0.437, training accuracy 0.963, validation accuracy 0.944
+[lstm+bracketed] epoch  15: training loss 0.173, validation loss 0.446, training accuracy 0.964, validation accuracy 0.943
+[lstm+bracketed] stopped early; best epoch was 12
+Saved lstm+bracketed to cache/models/lstm+bracketed.pt
+               parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                
+lstm+bracketed    bracketed 88.05 92.94    95.60    95.12        62.70           3782.56         66.21
+
+Wrote results to results/latest/lstm+bracketed
+
+============================== transformer, run 1 ==============================
+[transformer] epoch   1: training loss 4.856, validation loss 3.943
+[transformer] epoch   2: training loss 3.615, validation loss 3.239
+[transformer] epoch   3: training loss 2.953, validation loss 2.785
+[transformer] epoch   4: training loss 2.467, validation loss 2.470
+[transformer] epoch   5: training loss 2.104, validation loss 2.251
+[transformer] epoch   6: training loss 1.821, validation loss 2.108
+[transformer] epoch   7: training loss 1.606, validation loss 2.005
+[transformer] epoch   8: training loss 1.437, validation loss 1.937
+[transformer] epoch   9: training loss 1.308, validation loss 1.891
+[transformer] epoch  10: training loss 1.198, validation loss 1.849
+[transformer] epoch  11: training loss 1.107, validation loss 1.830
+[transformer] epoch  12: training loss 1.029, validation loss 1.797
+[transformer] epoch  13: training loss 0.958, validation loss 1.770
+[transformer] epoch  14: training loss 0.902, validation loss 1.765
+[transformer] epoch  15: training loss 0.847, validation loss 1.767
+[transformer] epoch  16: training loss 0.802, validation loss 1.745
+[transformer] epoch  17: training loss 0.759, validation loss 1.743
+[transformer] epoch  18: training loss 0.717, validation loss 1.760
+[transformer] epoch  19: training loss 0.685, validation loss 1.726
+[transformer] epoch  20: training loss 0.651, validation loss 1.735
+[transformer] epoch  21: training loss 0.619, validation loss 1.727
+[transformer] epoch  22: training loss 0.590, validation loss 1.729
+[transformer] stopped early; best epoch was 19
+Saved transformer to cache/models/transformer.pt
+            parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                             
+transformer         none 42.91 68.51    84.22    72.74        13.45           3953.49        114.92
+
+Wrote results to results/latest/transformer
+
+============================== transformer, run 2 ==============================
+[transformer] epoch   1: training loss 4.856, validation loss 3.943, training accuracy 0.301, validation accuracy 0.420
+[transformer] epoch   2: training loss 3.615, validation loss 3.239, training accuracy 0.447, validation accuracy 0.512
+[transformer] epoch   3: training loss 2.953, validation loss 2.785, training accuracy 0.517, validation accuracy 0.567
+[transformer] epoch   4: training loss 2.467, validation loss 2.470, training accuracy 0.565, validation accuracy 0.604
+[transformer] epoch   5: training loss 2.104, validation loss 2.251, training accuracy 0.603, validation accuracy 0.630
+[transformer] epoch   6: training loss 1.821, validation loss 2.108, training accuracy 0.635, validation accuracy 0.650
+[transformer] epoch   7: training loss 1.606, validation loss 2.005, training accuracy 0.661, validation accuracy 0.665
+[transformer] epoch   8: training loss 1.437, validation loss 1.937, training accuracy 0.685, validation accuracy 0.675
+[transformer] epoch   9: training loss 1.308, validation loss 1.891, training accuracy 0.703, validation accuracy 0.685
+[transformer] epoch  10: training loss 1.198, validation loss 1.849, training accuracy 0.720, validation accuracy 0.692
+[transformer] epoch  11: training loss 1.107, validation loss 1.830, training accuracy 0.735, validation accuracy 0.693
+[transformer] epoch  12: training loss 1.029, validation loss 1.797, training accuracy 0.748, validation accuracy 0.704
+[transformer] epoch  13: training loss 0.958, validation loss 1.770, training accuracy 0.761, validation accuracy 0.710
+[transformer] epoch  14: training loss 0.902, validation loss 1.765, training accuracy 0.772, validation accuracy 0.716
+[transformer] epoch  15: training loss 0.847, validation loss 1.767, training accuracy 0.782, validation accuracy 0.721
+[transformer] epoch  16: training loss 0.802, validation loss 1.745, training accuracy 0.791, validation accuracy 0.726
+[transformer] epoch  17: training loss 0.759, validation loss 1.743, training accuracy 0.800, validation accuracy 0.729
+[transformer] epoch  18: training loss 0.717, validation loss 1.760, training accuracy 0.809, validation accuracy 0.733
+[transformer] epoch  19: training loss 0.685, validation loss 1.726, training accuracy 0.816, validation accuracy 0.737
+[transformer] epoch  20: training loss 0.651, validation loss 1.735, training accuracy 0.824, validation accuracy 0.738
+[transformer] epoch  21: training loss 0.619, validation loss 1.727, training accuracy 0.831, validation accuracy 0.742
+[transformer] epoch  22: training loss 0.590, validation loss 1.729, training accuracy 0.838, validation accuracy 0.741
+[transformer] stopped early; best epoch was 19
+Saved transformer to cache/models/transformer.pt
+            parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                             
+transformer         none 42.91 68.51    84.22    72.74        13.45           4277.91        120.36
+
+Wrote results to results/latest/transformer
+
+============================== transformer+flat, run 1 ==============================
+[transformer+flat] epoch   1: training loss 4.584, validation loss 3.072
+[transformer+flat] epoch   2: training loss 2.476, validation loss 1.779
+[transformer+flat] epoch   3: training loss 1.563, validation loss 1.242
+[transformer+flat] epoch   4: training loss 1.120, validation loss 1.007
+[transformer+flat] epoch   5: training loss 0.857, validation loss 0.868
+[transformer+flat] epoch   6: training loss 0.689, validation loss 0.780
+[transformer+flat] epoch   7: training loss 0.576, validation loss 0.771
+[transformer+flat] epoch   8: training loss 0.489, validation loss 0.727
+[transformer+flat] epoch   9: training loss 0.429, validation loss 0.668
+[transformer+flat] epoch  10: training loss 0.375, validation loss 0.641
+[transformer+flat] epoch  11: training loss 0.334, validation loss 0.631
+[transformer+flat] epoch  12: training loss 0.304, validation loss 0.608
+[transformer+flat] epoch  13: training loss 0.275, validation loss 0.597
+[transformer+flat] epoch  14: training loss 0.250, validation loss 0.589
+[transformer+flat] epoch  15: training loss 0.231, validation loss 0.579
+[transformer+flat] epoch  16: training loss 0.216, validation loss 0.561
+[transformer+flat] epoch  17: training loss 0.197, validation loss 0.556
+[transformer+flat] epoch  18: training loss 0.183, validation loss 0.549
+[transformer+flat] epoch  19: training loss 0.174, validation loss 0.541
+[transformer+flat] epoch  20: training loss 0.161, validation loss 0.544
+[transformer+flat] epoch  21: training loss 0.155, validation loss 0.526
+[transformer+flat] epoch  22: training loss 0.147, validation loss 0.548
+[transformer+flat] epoch  23: training loss 0.138, validation loss 0.521
+[transformer+flat] epoch  24: training loss 0.131, validation loss 0.526
+[transformer+flat] epoch  25: training loss 0.124, validation loss 0.518
+[transformer+flat] epoch  26: training loss 0.119, validation loss 0.519
+[transformer+flat] epoch  27: training loss 0.115, validation loss 0.517
+[transformer+flat] epoch  28: training loss 0.110, validation loss 0.513
+[transformer+flat] epoch  29: training loss 0.104, validation loss 0.507
+[transformer+flat] epoch  30: training loss 0.100, validation loss 0.510
+[transformer+flat] epoch  31: training loss 0.096, validation loss 0.521
+[transformer+flat] epoch  32: training loss 0.095, validation loss 0.506
+[transformer+flat] epoch  33: training loss 0.091, validation loss 0.509
+[transformer+flat] epoch  34: training loss 0.087, validation loss 0.512
+[transformer+flat] epoch  35: training loss 0.084, validation loss 0.511
+[transformer+flat] stopped early; best epoch was 32
+Saved transformer+flat to cache/models/transformer+flat.pt
+                 parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                  
+transformer+flat         flat 85.43 92.09    95.88    94.52        59.06           6579.73         73.71
+
+Wrote results to results/latest/transformer+flat
+
+============================== transformer+flat, run 2 ==============================
+[transformer+flat] epoch   1: training loss 4.584, validation loss 3.072, training accuracy 0.345, validation accuracy 0.550
+[transformer+flat] epoch   2: training loss 2.476, validation loss 1.779, training accuracy 0.612, validation accuracy 0.723
+[transformer+flat] epoch   3: training loss 1.563, validation loss 1.242, training accuracy 0.731, validation accuracy 0.799
+[transformer+flat] epoch   4: training loss 1.120, validation loss 1.007, training accuracy 0.791, validation accuracy 0.832
+[transformer+flat] epoch   5: training loss 0.857, validation loss 0.868, training accuracy 0.830, validation accuracy 0.856
+[transformer+flat] epoch   6: training loss 0.689, validation loss 0.780, training accuracy 0.857, validation accuracy 0.873
+[transformer+flat] epoch   7: training loss 0.576, validation loss 0.771, training accuracy 0.876, validation accuracy 0.874
+[transformer+flat] epoch   8: training loss 0.489, validation loss 0.727, training accuracy 0.891, validation accuracy 0.882
+[transformer+flat] epoch   9: training loss 0.429, validation loss 0.668, training accuracy 0.902, validation accuracy 0.896
+[transformer+flat] epoch  10: training loss 0.375, validation loss 0.641, training accuracy 0.912, validation accuracy 0.902
+[transformer+flat] epoch  11: training loss 0.334, validation loss 0.631, training accuracy 0.920, validation accuracy 0.907
+[transformer+flat] epoch  12: training loss 0.304, validation loss 0.608, training accuracy 0.927, validation accuracy 0.909
+[transformer+flat] epoch  13: training loss 0.275, validation loss 0.597, training accuracy 0.932, validation accuracy 0.913
+[transformer+flat] epoch  14: training loss 0.250, validation loss 0.589, training accuracy 0.938, validation accuracy 0.916
+[transformer+flat] epoch  15: training loss 0.231, validation loss 0.579, training accuracy 0.942, validation accuracy 0.917
+[transformer+flat] epoch  16: training loss 0.216, validation loss 0.561, training accuracy 0.946, validation accuracy 0.922
+[transformer+flat] epoch  17: training loss 0.197, validation loss 0.556, training accuracy 0.950, validation accuracy 0.923
+[transformer+flat] epoch  18: training loss 0.183, validation loss 0.549, training accuracy 0.952, validation accuracy 0.926
+[transformer+flat] epoch  19: training loss 0.174, validation loss 0.541, training accuracy 0.955, validation accuracy 0.928
+[transformer+flat] epoch  20: training loss 0.161, validation loss 0.544, training accuracy 0.958, validation accuracy 0.929
+[transformer+flat] epoch  21: training loss 0.155, validation loss 0.526, training accuracy 0.959, validation accuracy 0.931
+[transformer+flat] epoch  22: training loss 0.147, validation loss 0.548, training accuracy 0.961, validation accuracy 0.926
+[transformer+flat] epoch  23: training loss 0.138, validation loss 0.521, training accuracy 0.963, validation accuracy 0.932
+[transformer+flat] epoch  24: training loss 0.131, validation loss 0.526, training accuracy 0.965, validation accuracy 0.932
+[transformer+flat] epoch  25: training loss 0.124, validation loss 0.518, training accuracy 0.966, validation accuracy 0.934
+[transformer+flat] epoch  26: training loss 0.119, validation loss 0.519, training accuracy 0.968, validation accuracy 0.934
+[transformer+flat] epoch  27: training loss 0.115, validation loss 0.517, training accuracy 0.969, validation accuracy 0.936
+[transformer+flat] epoch  28: training loss 0.110, validation loss 0.513, training accuracy 0.970, validation accuracy 0.937
+[transformer+flat] epoch  29: training loss 0.104, validation loss 0.507, training accuracy 0.971, validation accuracy 0.937
+[transformer+flat] epoch  30: training loss 0.100, validation loss 0.510, training accuracy 0.972, validation accuracy 0.939
+[transformer+flat] epoch  31: training loss 0.096, validation loss 0.521, training accuracy 0.973, validation accuracy 0.937
+[transformer+flat] epoch  32: training loss 0.095, validation loss 0.506, training accuracy 0.974, validation accuracy 0.938
+[transformer+flat] epoch  33: training loss 0.091, validation loss 0.509, training accuracy 0.975, validation accuracy 0.939
+[transformer+flat] epoch  34: training loss 0.087, validation loss 0.512, training accuracy 0.976, validation accuracy 0.939
+[transformer+flat] epoch  35: training loss 0.084, validation loss 0.511, training accuracy 0.977, validation accuracy 0.939
+[transformer+flat] stopped early; best epoch was 32
+Saved transformer+flat to cache/models/transformer+flat.pt
+                 parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                  
+transformer+flat         flat 85.43 92.09    95.88    94.52        59.06           7528.39         76.60
+
+Wrote results to results/latest/transformer+flat
+
+============================== transformer+bracketed, run 1 ==============================
+[transformer+bracketed] epoch   1: training loss 5.042, validation loss 4.228
+[transformer+bracketed] epoch   2: training loss 3.877, validation loss 3.522
+[transformer+bracketed] epoch   3: training loss 3.240, validation loss 3.044
+[transformer+bracketed] epoch   4: training loss 2.740, validation loss 2.675
+[transformer+bracketed] epoch   5: training loss 2.347, validation loss 2.415
+[transformer+bracketed] epoch   6: training loss 2.030, validation loss 2.208
+[transformer+bracketed] epoch   7: training loss 1.782, validation loss 2.072
+[transformer+bracketed] epoch   8: training loss 1.586, validation loss 1.978
+[transformer+bracketed] epoch   9: training loss 1.428, validation loss 1.895
+[transformer+bracketed] epoch  10: training loss 1.297, validation loss 1.842
+[transformer+bracketed] epoch  11: training loss 1.193, validation loss 1.797
+[transformer+bracketed] epoch  12: training loss 1.101, validation loss 1.760
+[transformer+bracketed] epoch  13: training loss 1.025, validation loss 1.702
+[transformer+bracketed] epoch  14: training loss 0.959, validation loss 1.687
+[transformer+bracketed] epoch  15: training loss 0.900, validation loss 1.674
+[transformer+bracketed] epoch  16: training loss 0.848, validation loss 1.652
+[transformer+bracketed] epoch  17: training loss 0.802, validation loss 1.623
+[transformer+bracketed] epoch  18: training loss 0.755, validation loss 1.639
+[transformer+bracketed] epoch  19: training loss 0.720, validation loss 1.618
+[transformer+bracketed] epoch  20: training loss 0.683, validation loss 1.594
+[transformer+bracketed] epoch  21: training loss 0.651, validation loss 1.577
+[transformer+bracketed] epoch  22: training loss 0.619, validation loss 1.600
+[transformer+bracketed] epoch  23: training loss 0.592, validation loss 1.581
+[transformer+bracketed] epoch  24: training loss 0.563, validation loss 1.578
+[transformer+bracketed] stopped early; best epoch was 21
+Saved transformer+bracketed to cache/models/transformer+bracketed.pt
+                      parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                       
+transformer+bracketed    bracketed 47.60 71.35    85.43    75.11        17.19           6166.68        126.69
+
+Wrote results to results/latest/transformer+bracketed
+
+============================== transformer+bracketed, run 2 ==============================
+[transformer+bracketed] epoch   1: training loss 5.042, validation loss 4.228, training accuracy 0.265, validation accuracy 0.371
+[transformer+bracketed] epoch   2: training loss 3.877, validation loss 3.522, training accuracy 0.403, validation accuracy 0.466
+[transformer+bracketed] epoch   3: training loss 3.240, validation loss 3.044, training accuracy 0.472, validation accuracy 0.527
+[transformer+bracketed] epoch   4: training loss 2.740, validation loss 2.675, training accuracy 0.525, validation accuracy 0.573
+[transformer+bracketed] epoch   5: training loss 2.347, validation loss 2.415, training accuracy 0.568, validation accuracy 0.607
+[transformer+bracketed] epoch   6: training loss 2.030, validation loss 2.208, training accuracy 0.604, validation accuracy 0.631
+[transformer+bracketed] epoch   7: training loss 1.782, validation loss 2.072, training accuracy 0.635, validation accuracy 0.653
+[transformer+bracketed] epoch   8: training loss 1.586, validation loss 1.978, training accuracy 0.660, validation accuracy 0.664
+[transformer+bracketed] epoch   9: training loss 1.428, validation loss 1.895, training accuracy 0.683, validation accuracy 0.678
+[transformer+bracketed] epoch  10: training loss 1.297, validation loss 1.842, training accuracy 0.702, validation accuracy 0.686
+[transformer+bracketed] epoch  11: training loss 1.193, validation loss 1.797, training accuracy 0.719, validation accuracy 0.697
+[transformer+bracketed] epoch  12: training loss 1.101, validation loss 1.760, training accuracy 0.734, validation accuracy 0.698
+[transformer+bracketed] epoch  13: training loss 1.025, validation loss 1.702, training accuracy 0.748, validation accuracy 0.715
+[transformer+bracketed] epoch  14: training loss 0.959, validation loss 1.687, training accuracy 0.760, validation accuracy 0.720
+[transformer+bracketed] epoch  15: training loss 0.900, validation loss 1.674, training accuracy 0.771, validation accuracy 0.724
+[transformer+bracketed] epoch  16: training loss 0.848, validation loss 1.652, training accuracy 0.781, validation accuracy 0.729
+[transformer+bracketed] epoch  17: training loss 0.802, validation loss 1.623, training accuracy 0.790, validation accuracy 0.736
+[transformer+bracketed] epoch  18: training loss 0.755, validation loss 1.639, training accuracy 0.800, validation accuracy 0.737
+[transformer+bracketed] epoch  19: training loss 0.720, validation loss 1.618, training accuracy 0.808, validation accuracy 0.742
+[transformer+bracketed] epoch  20: training loss 0.683, validation loss 1.594, training accuracy 0.816, validation accuracy 0.747
+[transformer+bracketed] epoch  21: training loss 0.651, validation loss 1.577, training accuracy 0.823, validation accuracy 0.755
+[transformer+bracketed] epoch  22: training loss 0.619, validation loss 1.600, training accuracy 0.831, validation accuracy 0.752
+[transformer+bracketed] epoch  23: training loss 0.592, validation loss 1.581, training accuracy 0.837, validation accuracy 0.751
+[transformer+bracketed] epoch  24: training loss 0.563, validation loss 1.578, training accuracy 0.844, validation accuracy 0.764
+[transformer+bracketed] stopped early; best epoch was 21
+Saved transformer+bracketed to cache/models/transformer+bracketed.pt
+                      parse_format  bleu  chrf  rouge_1  rouge_l  exact_match  training_seconds  test_seconds
+system                                                                                                       
+transformer+bracketed    bracketed 47.60 71.35    85.43    75.11        17.19           6698.01        133.57
+
+Wrote results to results/latest/transformer+bracketed

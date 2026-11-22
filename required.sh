@@ -24,6 +24,7 @@ VENV_PYTHON=".venv/bin/python"
 # torch is pinned to 2.9.1: newer versions crash on the Apple GPU (MPS) under
 # macOS 14.
 # pyarrow reads the ASLG-PC12 parquet file in step 4.
+# matplotlib draws the training curves.
 # ipykernel lets Jupyter or VS Code run the notebook with this environment.
 "$VENV_PYTHON" -m pip install --upgrade pip
 "$VENV_PYTHON" -m pip install \
@@ -34,6 +35,7 @@ VENV_PYTHON=".venv/bin/python"
     "pyarrow==26.0.1" \
     "spacy==3.8.18" \
     "sacrebleu==2.6.0" \
+    "matplotlib==3.11.2" \
     "ipykernel"
 
 # 3. The spaCy English model, unless it is already installed.

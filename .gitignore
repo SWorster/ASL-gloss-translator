@@ -11,3 +11,12 @@ results/
 .DS_Store
 .ipynb_checkpoints/
 __pycache__/
+
+# report
+final.bbl
+final.pdf
+final.synctex.gz
+final.tex
+references.bib
+rubric.pdf
+worst.sty
